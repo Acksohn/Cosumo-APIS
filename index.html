@@ -82,7 +82,7 @@
       $("#frm_nuevo_cliente").on('submit', function(event) {
         event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
         $.ajax({
-          url: 'http://54.196.252.157:3000/api/clientes',
+          url: 'http://3.94.197.62:3000/api/clientes',
           type: 'POST',
           data: $(this).serialize(),
           success: function(data) {
@@ -117,7 +117,7 @@
 
       function cargarClientes() {
         $.ajax({
-          url: 'http://54.196.252.157:3000/api/clientes',
+          url: 'http://3.94.197.62:3000/api/clientes',
           type: 'GET',
           success: function(data) {
             // Asegúrate de que data sea un array de objetos
