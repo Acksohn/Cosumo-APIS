@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliente</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <h1>CONSUMO DE UNA API <br> CLIENTE <br> ENVIAR y CONSULTAR DATOS</h1>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="text-end">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Registrar nuevo cliente
+        </button>
+    </div>
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Registro</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="" method="post" id="frm_nuevo_cliente">
+                <label for=""><b>Nombre:</b></label>
+                <br>
+                <input type="text" name="nombre" id="nombre"  class="form-control">
+                <br>
+                <label for=""><b>Email:</b></label>
+                <br>
+                <input type="text" name="email" id="email"  class="form-control">
+                <br>
+                <label for=""><b>Edad:</b></label>
+                <br>
+                <input type="number" name="age" id="age"  class="form-control">
+                <hr>
+                <center>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                </center>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br><br>
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Edad</th>
+        </tr>
+    </thead>
+    <tbody id="clientes-tbody">
+        <tr>
+          <td colspan="4">Cargando datos...</td>
+        </tr>
+      </tbody>
+  </table>
+</body>
+
+<script>
+    $(document).ready(function() {
+      $("#frm_nuevo_cliente").on('submit', function(event) {
+        event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
+        $.ajax({
+          url: 'http://54.196.252.157:3000/api/clientes',
+          type: 'POST',
+          data: $(this).serialize(),
+          success: function(data) {
+            console.log(data);
+            if (data.estado) {
+              Swal.fire({
+                title: "CONFIRMACIÓN",
+                text: data.mensaje,
+                icon: 'success'
+              });
+              $("#exampleModal").modal('hide');
+              $("#frm_nuevo_cliente")[0].reset();
+              cargarCines(); // Asegúrate de que esta función esté definida
+            } else {
+              Swal.fire({
+                title: "ERROR",
+                text: data.mensaje,
+                icon: 'error'
+              });
+            }
+          },
+          error: function(xhr, status, error) {
+            console.error("Error en la solicitud:", xhr.responseText);
+            Swal.fire({
+              title: "ERROR",
+              text: "Hubo un problema con la solicitud.",
+              icon: 'error'
+            });
+          }
+        });
+      });
+
+      function cargarClientes() {
+        $.ajax({
+          url: 'http://54.196.252.157:3000/api/clientes',
+          type: 'GET',
+          success: function(data) {
+            // Asegúrate de que data sea un array de objetos
+            if (Array.isArray(data)) {
+              let clientesHTML = '';
+              data.forEach(cliente => {
+                clientesHTML += `
+                  <tr>
+                    <td>${cliente.id}</td>
+                    <td>${cliente.nombre}</td>
+                    <td>${cliente.email}</td>
+                    <td>${cliente.edad}</td>
+                  </tr>
+                `;
+              });
+              $('#clientes-tbody').html(clientesHTML);
+            } else {
+              $('#clientes-tbody').html('<tr><td colspan="4">No se encontraron datos</td></tr>');
+            }
+          },
+          error: function(xhr, status, error) {
+            console.error("Error en la solicitud:", xhr.responseText);
+            $('#clientes-tbody').html('<tr><td colspan="4">Error al cargar los datos</td></tr>');
+          }
+        });
+      }
+
+      // Cargar clientes cuando el documento esté listo
+      cargarClientes();
+
+    });
+
+</script>
+</html>
