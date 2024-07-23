@@ -114,39 +114,40 @@
           }
         });
       });
-
-      function cargarClientes() {
-        $.ajax({
-          url: 'http://3.94.197.62:3000/api/clientes',
-          type: 'GET',
-          success: function(data) {
-            // Asegúrate de que data sea un array de objetos
-            if (Array.isArray(data)) {
-              let clientesHTML = '';
-              data.forEach(cliente => {
-                clientesHTML += `
-                  <tr>
-                    <td>${cliente.id}</td>
-                    <td>${cliente.nombre}</td>
-                    <td>${cliente.email}</td>
-                    <td>${cliente.edad}</td>
-                  </tr>
-                `;
-              });
-              $('#clientes-tbody').html(clientesHTML);
-            } else {
-              $('#clientes-tbody').html('<tr><td colspan="4">No se encontraron datos</td></tr>');
+      $(document).ready(function() {
+        function cargarClientes() {
+          $.ajax({
+            url: 'http://3.94.197.62:3000/api/clientes',
+            type: 'GET',
+            success: function(data) {
+              // Asegúrate de que data sea un array de objetos
+              if (Array.isArray(data)) {
+                let clientesHTML = '';
+                data.forEach(cliente => {
+                  clientesHTML += `
+                    <tr>
+                      <td>${cliente.id}</td>
+                      <td>${cliente.nombre}</td>
+                      <td>${cliente.email}</td>
+                      <td>${cliente.edad}</td>
+                    </tr>
+                  `;
+                });
+                $('#clientes-tbody').html(clientesHTML);
+              } else {
+                $('#clientes-tbody').html('<tr><td colspan="4">No se encontraron datos</td></tr>');
+              }
+            },
+            error: function(xhr, status, error) {
+              console.error("Error en la solicitud:", xhr.responseText);
+              $('#clientes-tbody').html('<tr><td colspan="4">Error al cargar los datos</td></tr>');
             }
-          },
-          error: function(xhr, status, error) {
-            console.error("Error en la solicitud:", xhr.responseText);
-            $('#clientes-tbody').html('<tr><td colspan="4">Error al cargar los datos</td></tr>');
-          }
-        });
-      }
-
-      // Cargar clientes cuando el documento esté listo
-      cargarClientes();
+          });
+        }
+  
+        // Cargar clientes cuando el documento esté listo
+        cargarClientes();
+      });
 
     });
 
