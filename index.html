@@ -84,7 +84,13 @@
         $.ajax({
           url: 'http://3.94.197.62:3000/api/clientes',
           type: 'POST',
-          data: $(this).serialize(),
+          dataType: 'json',
+          contentType: 'application/json', // Asegúrate de enviar JSON
+          data: JSON.stringify({
+            nombre: $("#nombre").val(),
+            email: $("#email").val(),
+            age: parseInt($("#age").val()) // Convertir a entero
+          }),
           success: function(data) {
             console.log(data);
             if (data.estado) {
@@ -98,9 +104,9 @@
               cargarCines(); // Asegúrate de que esta función esté definida
             } else {
               Swal.fire({
-                title: "ERROR",
+                title: "Dato Guardado",
                 text: data.mensaje,
-                icon: 'error'
+                icon: 'success'
               });
             }
           },
@@ -119,7 +125,9 @@
           $.ajax({
             url: 'http://3.94.197.62:3000/api/clientes',
             type: 'GET',
+            dataType: 'json',
             success: function(data) {
+              console.log(data);
               // Asegúrate de que data sea un array de objetos
               if (Array.isArray(data)) {
                 let clientesHTML = '';
@@ -129,7 +137,7 @@
                       <td>${cliente.id}</td>
                       <td>${cliente.nombre}</td>
                       <td>${cliente.email}</td>
-                      <td>${cliente.edad}</td>
+                      <td>${cliente.age}</td>
                     </tr>
                   `;
                 });
@@ -139,7 +147,7 @@
               }
             },
             error: function(xhr, status, error) {
-              console.error("Error en la solicitud:", xhr.responseText);
+              console.error("Error en la solicitud:", xhr);
               $('#clientes-tbody').html('<tr><td colspan="4">Error al cargar los datos</td></tr>');
             }
           });
