@@ -1,163 +1,85 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cliente</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <h1>CONSUMO DE UNA API <br> CLIENTE <br> ENVIAR y CONSULTAR DATOS</h1>
-            </div>
-        </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Inicio</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+           <li class="nav-item">
+            <a class="nav-link" href="cliente.html">Clientes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="empleado.html">Empleados</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="proveedor.html">Proveedores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="producto.html">Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="venta.html">Venta</a>
+          </li>
+      </div>
     </div>
-    <hr>
-    <div class="text-end">
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Registrar nuevo cliente
-        </button>
+</nav>
+
+  <div id="carouselExample" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://media.istockphoto.com/id/1398883468/es/vector/vista-en-perspectiva-del-pasillo-del-supermercado-supermercado-con-coloridos-estantes-de.jpg?s=612x612&w=0&k=20&c=y_B6ETq2RN5Oj_Md4hag38q1oE4dQh26iouGe4q007Q=" height="450px" width="100%" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="https://img.freepik.com/fotos-premium/mujer-trabajando-supermercado_274679-36394.jpg" height="450px" width="100%" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="https://okdiario.com/img/2021/11/25/franki-chamaki-ivfp_yxzuyq-unsplash11-655x368.jpg" height="450px" width="100%" alt="...">
+      </div>
     </div>
-
-
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Registro</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form action="" method="post" id="frm_nuevo_cliente">
-                <label for=""><b>Nombre:</b></label>
-                <br>
-                <input type="text" name="nombre" id="nombre"  class="form-control">
-                <br>
-                <label for=""><b>Email:</b></label>
-                <br>
-                <input type="text" name="email" id="email"  class="form-control">
-                <br>
-                <label for=""><b>Edad:</b></label>
-                <br>
-                <input type="number" name="age" id="age"  class="form-control">
-                <hr>
-                <center>
-                    <button type="submit" class="btn btn-success">Guardar</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                </center>
-            </form>
-        </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <hr>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2 class="text-center">MISIÓN</h2>
+        <br>
+        <p align="justify">Proveer a nuestros clientes una experiencia de compra excepcional mediante una amplia variedad de productos de alta calidad, precios competitivos y un servicio al cliente amigable y eficiente. Nos comprometemos a crear un entorno acogedor y conveniente que satisfaga las necesidades diarias de las familias y la comunidad, mientras promovemos prácticas sostenibles y responsables.</p>
+      </div>
+      <div class="col">
+        <h2 class="text-center">VISIÓN</h2>
+        <br>
+        <p align="justify">Ser el supermercado preferido por las familias y la comunidad, reconocido por nuestra innovación, calidad y compromiso con el bienestar de nuestros clientes y empleados. Aspiramos a liderar el mercado mediante la implementación de prácticas sostenibles, la integración de tecnología avanzada y la creación de una experiencia de compra inigualable que inspire confianza y lealtad.</p>
       </div>
     </div>
   </div>
-
-  <br><br>
-  <table class="table table-bordered table-striped table-hover">
-    <thead>
-        <tr>
-            <th>id</th>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Edad</th>
-        </tr>
-    </thead>
-    <tbody id="clientes-tbody">
-        <tr>
-          <td colspan="4">Cargando datos...</td>
-        </tr>
-      </tbody>
-  </table>
+  <hr>
+  <div class="container" style="background-color: #212529; color:white;">
+    <center>
+    <h5><b>Elaborado por:</b> Acksohn Maquilon &copy;</h5>
+    <h5><b>Carrera:</b> Sistemas de Información</h5>
+    <h5><b>Universidad Técnica de Cotopaxi</b></h5>
+  </center>
+  </div>
 </body>
-
-<script>
-    $(document).ready(function() {
-      $("#frm_nuevo_cliente").on('submit', function(event) {
-        event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
-        $.ajax({
-          url: 'http://3.94.197.62:3000/api/clientes',
-          type: 'POST',
-          dataType: 'json',
-          contentType: 'application/json', // Asegúrate de enviar JSON
-          data: JSON.stringify({
-            nombre: $("#nombre").val(),
-            email: $("#email").val(),
-            age: parseInt($("#age").val()) // Convertir a entero
-          }),
-          success: function(data) {
-            console.log(data);
-            if (data.estado) {
-              Swal.fire({
-                title: "CONFIRMACIÓN",
-                text: data.mensaje,
-                icon: 'success'
-              });
-              $("#exampleModal").modal('hide');
-              $("#frm_nuevo_cliente")[0].reset();
-              cargarCines(); // Asegúrate de que esta función esté definida
-            } else {
-              Swal.fire({
-                title: "Dato Guardado",
-                text: data.mensaje,
-                icon: 'success'
-              });
-            }
-          },
-          error: function(xhr, status, error) {
-            console.error("Error en la solicitud:", xhr.responseText);
-            Swal.fire({
-              title: "ERROR",
-              text: "Hubo un problema con la solicitud.",
-              icon: 'error'
-            });
-          }
-        });
-      });
-      $(document).ready(function() {
-        function cargarClientes() {
-          $.ajax({
-            url: 'http://3.94.197.62:3000/api/clientes',
-            type: 'GET',
-            dataType: 'json',
-            success: function(data) {
-              console.log(data);
-              // Asegúrate de que data sea un array de objetos
-              if (Array.isArray(data)) {
-                let clientesHTML = '';
-                data.forEach(cliente => {
-                  clientesHTML += `
-                    <tr>
-                      <td>${cliente.id}</td>
-                      <td>${cliente.nombre}</td>
-                      <td>${cliente.email}</td>
-                      <td>${cliente.age}</td>
-                    </tr>
-                  `;
-                });
-                $('#clientes-tbody').html(clientesHTML);
-              } else {
-                $('#clientes-tbody').html('<tr><td colspan="4">No se encontraron datos</td></tr>');
-              }
-            },
-            error: function(xhr, status, error) {
-              console.error("Error en la solicitud:", xhr);
-              $('#clientes-tbody').html('<tr><td colspan="4">Error al cargar los datos</td></tr>');
-            }
-          });
-        }
-  
-        // Cargar clientes cuando el documento esté listo
-        cargarClientes();
-      });
-
-    });
-
-</script>
 </html>
