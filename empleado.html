@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cliente</title>
+    <title>Empleado</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -49,7 +49,7 @@
     <div class="text-end">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Registrar nuevo cliente
+            Registrar nuevo empleado
         </button>
     </div>
 
@@ -64,18 +64,18 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="" method="post" id="frm_nuevo_cliente">
+            <form action="" method="post" id="frm_nuevo_empleado">
                 <label for=""><b>Nombre:</b></label>
                 <br>
-                <input type="text" name="nombre" id="nombre"  class="form-control" required>
+                <input type="text" name="nombre_emp" id="nombre_emp"  class="form-control" required>
                 <br>
                 <label for=""><b>Email:</b></label>
                 <br>
-                <input type="text" name="email" id="email"  class="form-control" required>
+                <input type="text" name="email_emp" id="email_emp"  class="form-control" required>
                 <br>
-                <label for=""><b>Edad:</b></label>
+                <label for=""><b>Telofono:</b></label>
                 <br>
-                <input type="number" name="age" id="age"  class="form-control" required>
+                <input type="number" name="telefono" id="telefono"  class="form-control" required>
                 <br>
                 <label for=""><b>Apellido:</b></label>
                 <input type="text" name="apellido" id="apellido"  class="form-control" required>
@@ -103,12 +103,12 @@
             <th>id</th>
             <th>Nombre</th>
             <th>Email</th>
-            <th>Edad</th>
+            <th>Telefono</th>
             <th>Apellido</th>
             <th>Genero</th>
         </tr>
     </thead>
-    <tbody id="clientes-tbody">
+    <tbody id="empleados-tbody">
         <tr>
           <td colspan="4">Cargando datos...</td>
         </tr>
@@ -126,17 +126,17 @@
 
 <script>
     $(document).ready(function() {
-      $("#frm_nuevo_cliente").on('submit', function(event) {
+      $("#frm_nuevo_empleado").on('submit', function(event) {
         event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
         $.ajax({
-          url: 'http://3.84.201.209:3333/api/clientes',
+          url: 'http://3.84.201.209:3001/api/empleados',
           type: 'POST',
           dataType: 'json',
           contentType: 'application/json', // Asegúrate de enviar JSON
           data: JSON.stringify({
-            nombre: $("#nombre").val(),
-            email: $("#email").val(),
-            age: parseInt($("#age").val()), // Convertir a entero
+            nombre_emp: $("#nombre_emp").val(),
+            email_emp: $("#email_emp").val(),
+            telefono: $("#telefono").val(), // Convertir a entero
             apellido: $("#apellido").val(),
             genero: $("#genero").val(),
           }),
@@ -149,7 +149,7 @@
                 icon: 'success'
               });
               $("#exampleModal").modal('hide');
-              $("#frm_nuevo_cliente")[0].reset();
+              $("#frm_nuevo_empleado")[0].reset();
               cargarCines(); // Asegúrate de que esta función esté definida
             } else {
               Swal.fire({
@@ -170,42 +170,42 @@
         });
       });
       $(document).ready(function() {
-        function cargarClientes() {
+        function cargarEmpleados() {
           $.ajax({
-            url: 'http://3.84.201.209:3333/api/clientes',
+            url: 'http://3.84.201.209:3001/api/empleados',
             type: 'GET',
             dataType: 'json',
             success: function(data) {
               console.log(data);
               // Asegúrate de que data sea un array de objetos
               if (Array.isArray(data)) {
-                let clientesHTML = '';
-                data.forEach(cliente => {
-                  clientesHTML += `
+                let empleadosHTML = '';
+                data.forEach(empleado => {
+                  empleadosHTML += `
                     <tr>
-                      <td>${cliente.id}</td>
-                      <td>${cliente.nombre}</td>
-                      <td>${cliente.email}</td>
-                      <td>${cliente.age}</td>
-                      <td>${cliente.apellido}</td>
-                      <td>${cliente.genero}</td>
+                      <td>${empleado.id_emp}</td>
+                      <td>${empleado.nombre_emp}</td>
+                      <td>${empleado.email_emp}</td>
+                      <td>${empleado.telefono}</td>
+                      <td>${empleado.apellido}</td>
+                      <td>${empleado.genero}</td>
                     </tr>
                   `;
                 });
-                $('#clientes-tbody').html(clientesHTML);
+                $('#empleados-tbody').html(empleadosHTML);
               } else {
-                $('#clientes-tbody').html('<tr><td colspan="4">No se encontraron datos</td></tr>');
+                $('#empleados-tbody').html('<tr><td colspan="4">No se encontraron datos</td></tr>');
               }
             },
             error: function(xhr, status, error) {
               console.error("Error en la solicitud:", xhr);
-              $('#clientes-tbody').html('<tr><td colspan="4">Error al cargar los datos</td></tr>');
+              $('#empleados-tbody').html('<tr><td colspan="4">Error al cargar los datos</td></tr>');
             }
           });
         }
   
-        // Cargar clientes cuando el documento esté listo
-        cargarClientes();
+        // Cargar empleados cuando el documento esté listo
+        cargarEmpleados();
       });
 
     });

@@ -129,7 +129,7 @@
       $("#frm_nuevo_cliente").on('submit', function(event) {
         event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
         $.ajax({
-          url: 'http://3.84.201.209:3333/api/clientes',
+          url: 'http://3.84.201.209:3001/api/clientes',
           type: 'POST',
           dataType: 'json',
           contentType: 'application/json', // Asegúrate de enviar JSON
@@ -172,7 +172,7 @@
       $(document).ready(function() {
         function cargarClientes() {
           $.ajax({
-            url: 'http://3.84.201.209:3333/api/clientes',
+            url: 'http://3.84.201.209:3001/api/clientes',
             type: 'GET',
             dataType: 'json',
             success: function(data) {
