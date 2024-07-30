@@ -129,7 +129,7 @@
       $("#frm_nuevo_empleado").on('submit', function(event) {
         event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
         $.ajax({
-          url: 'http://3.84.201.209:3001/api/empleados',
+          url: 'http://3.84.201.209:3333/api/empleados',
           type: 'POST',
           dataType: 'json',
           contentType: 'application/json', // Asegúrate de enviar JSON
@@ -172,7 +172,7 @@
       $(document).ready(function() {
         function cargarEmpleados() {
           $.ajax({
-            url: 'http://3.84.201.209:3001/api/empleados',
+            url: 'http://3.84.201.209:3333/api/empleados',
             type: 'GET',
             dataType: 'json',
             success: function(data) {
